@@ -29,6 +29,32 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError("No user found with this email address");
       }
+
+      const correctPass = await user.isCorrectPassword(password);
+
+      if (!correctPass) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    saveBook: async (
+      parent,
+      { bookInput: { authors, description, title, bookId, image, link } },
+      context
+    ) => {
+      if (context.user) {
+        const book = {
+          bookId,
+          authors,
+          description,
+          title,
+          image,
+          link,
+        };
+      }
     },
   },
 };
