@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import {
   Jumbotron,

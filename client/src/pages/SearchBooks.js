@@ -1,4 +1,3 @@
-import { useMutation } from "apollo/client";
 import React, { useState, useEffect } from "react";
 import {
   Jumbotron,
@@ -9,11 +8,12 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
+import { useMutation } from "@apollo/client";
 
 import Auth from "../utils/auth";
-import { SAVE_BOOK } from "../utils/mutations";
 import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
+import { SAVE_BOOK } from "../utils/mutations";
 
 const SearchBooks = () => {
   const [saveBook] = useMutation(SAVE_BOOK);
@@ -76,12 +76,15 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook({ variables: { bookToSave } });
+      const response = await saveBook({
+        variables: {
+          bookInput: bookToSave,
+        },
+      });
 
       const {
         data: { saveBook: updatedUser },
       } = response;
-
       if (!updatedUser) {
         throw new Error("something went wrong!");
       }
