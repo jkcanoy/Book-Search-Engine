@@ -8,9 +8,9 @@ import {
   Button,
 } from "react-bootstrap";
 
-import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
+import { QUERY_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
@@ -26,7 +26,9 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook({ variables: { bookId } });
+      const response = await deleteBook({
+        variables: { bookId },
+      });
 
       const {
         data: { removeBook: updatedUser },
@@ -59,14 +61,14 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? "book" : "books"
+          {savedBooks.length > 0
+            ? `Viewing ${savedBooks.length} saved ${
+                savedBooks.length === 1 ? "book" : "books"
               }:`
             : "You have no saved books!"}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
                 {book.image ? (
