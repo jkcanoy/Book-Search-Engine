@@ -35,6 +35,10 @@ OR
 
 Demo
 
+The following screenshot shows the user's saved books page
+
+![Logged in user's saved books page](./client/public/savedBooks.png)
+
 The following gif shows the web application's appearance and functionality
 
 ![User logs in, searches for books and adds them to saved books, then removes books from saved books](./client/public/GoogleBookSearch.gif)
